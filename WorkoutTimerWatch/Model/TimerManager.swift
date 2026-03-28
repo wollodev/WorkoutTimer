@@ -2,6 +2,7 @@ import Foundation
 import WatchKit
 
 @Observable
+@MainActor
 final class TimerManager: NSObject, WKExtendedRuntimeSessionDelegate {
     let engine = TimerEngine()
 

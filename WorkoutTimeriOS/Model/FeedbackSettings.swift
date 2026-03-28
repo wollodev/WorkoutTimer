@@ -31,4 +31,13 @@ final class FeedbackSettings {
             UserDefaults.standard.set(newValue, forKey: "countdownSound")
         }
     }
+
+    var spokenCountdownEnabled: Bool {
+        get {
+            UserDefaults.standard.object(forKey: "spokenCountdown") as? Bool ?? false
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "spokenCountdown")
+        }
+    }
 }

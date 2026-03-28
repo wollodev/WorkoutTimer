@@ -16,8 +16,9 @@ struct SettingsView: View {
                     .pickerStyle(.segmented)
                 }
 
-                Section {
+                Section(String(localized: "countdown")) {
                     Toggle(String(localized: "countdownSound"), isOn: $settings.countdownSoundEnabled)
+                    Toggle(String(localized: "spokenCountdown"), isOn: $settings.spokenCountdownEnabled)
                 }
             }
             .navigationTitle(String(localized: "settings"))

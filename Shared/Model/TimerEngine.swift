@@ -1,6 +1,7 @@
 import Foundation
 
 @Observable
+@MainActor
 final class TimerEngine {
     let intervalOptions: [TimeInterval] = stride(from: 5, through: 120, by: 5).map {
         TimeInterval($0)
@@ -44,8 +45,12 @@ final class TimerEngine {
     }
 
     private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            self?.tick()
+        let t = Timer(timeInterval: 1.0, repeats: true) { [weak self] _ in
+            MainActor.assumeIsolated {
+                self?.tick()
+            }
         }
+        RunLoop.main.add(t, forMode: .common)
+        timer = t
     }
 }

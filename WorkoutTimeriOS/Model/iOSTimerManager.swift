@@ -1,6 +1,7 @@
 import Foundation
 
 @Observable
+@MainActor
 final class iOSTimerManager {
     let engine = TimerEngine()
 
@@ -24,6 +25,7 @@ final class iOSTimerManager {
     private let hapticPlayer = iOSHapticPlayer()
     private let audioPlayer = AudioFeedbackPlayer()
     private let countdownPlayer = CountdownSoundPlayer()
+    private let spokenPlayer = SpokenCountdownPlayer()
     private let backgroundAudio = BackgroundAudioManager()
 
     var feedbackSettings = FeedbackSettings()
@@ -60,12 +62,17 @@ final class iOSTimerManager {
     }
 
     private func handleTick(remaining: TimeInterval) {
-        guard feedbackSettings.countdownSoundEnabled else { return }
-
         let seconds = Int(remaining)
-        if seconds >= 1, seconds <= 3 {
+
+        if feedbackSettings.spokenCountdownEnabled, seconds >= 1, seconds <= 3 {
+            spokenPlayer.speakCountdown(seconds)
+        } else if feedbackSettings.spokenCountdownEnabled, seconds <= 0 {
+            spokenPlayer.speakDone()
+        }
+
+        if feedbackSettings.countdownSoundEnabled, seconds >= 1, seconds <= 3 {
             countdownPlayer.playTick()
-        } else if seconds <= 0 {
+        } else if feedbackSettings.countdownSoundEnabled, seconds <= 0 {
             countdownPlayer.playFinish()
         }
     }

@@ -25,6 +25,17 @@ struct ContentView: View {
                 }
                 .disabled(timerManager.isRunning)
 
+                Button {
+                    showPicker = true
+                } label: {
+                    Label(String(localized: "change"), systemImage: "slider.horizontal.3")
+                        .font(.subheadline)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+                .opacity(timerManager.isRunning ? 0 : 1)
+                .disabled(timerManager.isRunning)
+
                 Spacer()
 
                 Button {
