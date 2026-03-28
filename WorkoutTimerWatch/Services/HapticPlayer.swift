@@ -6,6 +6,6 @@ protocol HapticPlayer {
 
 struct WatchHapticPlayer: HapticPlayer {
   func playHaptic() {
-    WKInterfaceDevice.current().play(.notification)
+    WKInterfaceDevice.current().play(.success)
   }
 }
