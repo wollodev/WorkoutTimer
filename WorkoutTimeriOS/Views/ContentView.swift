@@ -19,7 +19,8 @@ struct ContentView: View {
                 } label: {
                     let value = timerManager.isRunning ? timerManager.remaining : timerManager.selectedInterval
                     Text(DurationFormatter.formatNumeric(value))
-                        .font(.system(size: 120, weight: .bold, design: .rounded))
+                        .font(.system(size: 160, weight: .bold, design: .rounded))
+                        .minimumScaleFactor(0.5)
                         .monospacedDigit()
                         .foregroundStyle(timerManager.isRunning ? .green : .primary)
                 }

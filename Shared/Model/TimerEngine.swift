@@ -7,7 +7,15 @@ final class TimerEngine {
         TimeInterval($0)
     }
 
-    var selectedInterval: TimeInterval = 30
+    var selectedInterval: TimeInterval = {
+        let saved = UserDefaults.standard.double(forKey: "selectedInterval")
+        return saved > 0 ? saved : 30
+    }() {
+        didSet {
+            UserDefaults.standard.set(selectedInterval, forKey: "selectedInterval")
+        }
+    }
+
     var isRunning: Bool = false
     var remaining: TimeInterval = 0
 
