@@ -1,11 +1,11 @@
 import WatchKit
 
 protocol HapticPlayer {
-  func playHaptic()
+    func playHaptic()
 }
 
 struct WatchHapticPlayer: HapticPlayer {
-  func playHaptic() {
-    WKInterfaceDevice.current().play(.success)
-  }
+    func playHaptic() {
+        WKInterfaceDevice.current().play(.success)
+    }
 }
