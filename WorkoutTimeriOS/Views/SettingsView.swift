@@ -17,8 +17,12 @@ struct SettingsView: View {
                 }
 
                 Section(String(localized: "countdown")) {
-                    Toggle(String(localized: "countdownSound"), isOn: $settings.countdownSoundEnabled)
-                    Toggle(String(localized: "spokenCountdown"), isOn: $settings.spokenCountdownEnabled)
+                    Picker(String(localized: "countdown"), selection: $settings.countdownType) {
+                        ForEach(CountdownType.allCases, id: \.self) { type in
+                            Text(type.localizedName).tag(type)
+                        }
+                    }
+                    .pickerStyle(.segmented)
                 }
             }
             .navigationTitle(String(localized: "settings"))

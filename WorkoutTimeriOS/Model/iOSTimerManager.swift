@@ -55,7 +55,7 @@ final class iOSTimerManager {
         case .vibration:
             hapticPlayer.playHaptic()
         case .audio:
-            if !feedbackSettings.countdownSoundEnabled {
+            if feedbackSettings.countdownType == .off {
                 audioPlayer.playBeep()
             }
         }
@@ -64,16 +64,21 @@ final class iOSTimerManager {
     private func handleTick(remaining: TimeInterval) {
         let seconds = Int(remaining)
 
-        if feedbackSettings.spokenCountdownEnabled, seconds >= 1, seconds <= 3 {
-            spokenPlayer.speakCountdown(seconds)
-        } else if feedbackSettings.spokenCountdownEnabled, seconds <= 0 {
-            spokenPlayer.speakDone()
-        }
-
-        if feedbackSettings.countdownSoundEnabled, seconds >= 1, seconds <= 3 {
-            countdownPlayer.playTick()
-        } else if feedbackSettings.countdownSoundEnabled, seconds <= 0 {
-            countdownPlayer.playFinish()
+        switch feedbackSettings.countdownType {
+        case .off:
+            break
+        case .sound:
+            if seconds >= 1, seconds <= 3 {
+                countdownPlayer.playTick()
+            } else if seconds <= 0 {
+                countdownPlayer.playFinish()
+            }
+        case .spoken:
+            if seconds >= 1, seconds <= 3 {
+                spokenPlayer.speakCountdown(seconds)
+            } else if seconds <= 0 {
+                spokenPlayer.speakDone()
+            }
         }
     }
 }

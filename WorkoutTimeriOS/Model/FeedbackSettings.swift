@@ -12,6 +12,20 @@ enum FeedbackType: String, CaseIterable {
     }
 }
 
+enum CountdownType: String, CaseIterable {
+    case off
+    case sound
+    case spoken
+
+    var localizedName: String {
+        switch self {
+        case .off: String(localized: "off")
+        case .sound: String(localized: "countdownSound")
+        case .spoken: String(localized: "spokenCountdown")
+        }
+    }
+}
+
 @Observable
 final class FeedbackSettings {
     var feedbackType: FeedbackType {
@@ -23,21 +37,12 @@ final class FeedbackSettings {
         }
     }
 
-    var countdownSoundEnabled: Bool {
+    var countdownType: CountdownType {
         get {
-            UserDefaults.standard.object(forKey: "countdownSound") as? Bool ?? true
+            CountdownType(rawValue: UserDefaults.standard.string(forKey: "countdownType") ?? "sound") ?? .sound
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "countdownSound")
-        }
-    }
-
-    var spokenCountdownEnabled: Bool {
-        get {
-            UserDefaults.standard.object(forKey: "spokenCountdown") as? Bool ?? false
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "spokenCountdown")
+            UserDefaults.standard.set(newValue.rawValue, forKey: "countdownType")
         }
     }
 }
