@@ -53,7 +53,9 @@ final class iOSTimerManager {
         case .vibration:
             hapticPlayer.playHaptic()
         case .audio:
-            audioPlayer.playBeep()
+            if !feedbackSettings.countdownSoundEnabled {
+                audioPlayer.playBeep()
+            }
         }
     }
 
@@ -63,6 +65,8 @@ final class iOSTimerManager {
         let seconds = Int(remaining)
         if seconds >= 1, seconds <= 3 {
             countdownPlayer.playTick()
+        } else if seconds <= 0 {
+            countdownPlayer.playFinish()
         }
     }
 }

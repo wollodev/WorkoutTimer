@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "audio" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -14,6 +17,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio"
+          }
+        }
+      }
+    },
+    "countdownSound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Countdown-Signal"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Countdown Sound"
           }
         }
       }
@@ -99,23 +119,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
-          }
-        }
-      }
-    },
-    "countdownSound" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Countdown-Signal"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Countdown Sound"
           }
         }
       }

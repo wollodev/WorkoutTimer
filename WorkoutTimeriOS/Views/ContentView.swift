@@ -17,14 +17,11 @@ struct ContentView: View {
                         showPicker = true
                     }
                 } label: {
-                    Text(
-                        DurationFormatter.format(
-                            timerManager.isRunning ? timerManager.remaining : timerManager.selectedInterval
-                        )
-                    )
-                    .font(.system(size: 80, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .foregroundStyle(timerManager.isRunning ? .green : .primary)
+                    let value = timerManager.isRunning ? timerManager.remaining : timerManager.selectedInterval
+                    Text(DurationFormatter.formatNumeric(value))
+                        .font(.system(size: 120, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                        .foregroundStyle(timerManager.isRunning ? .green : .primary)
                 }
                 .disabled(timerManager.isRunning)
 
@@ -38,13 +35,12 @@ struct ContentView: View {
                     }
                 } label: {
                     Text(timerManager.isRunning ? .stop : .start)
-                        .font(.title2.weight(.semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
+                        .font(.title.weight(.semibold))
+                        .padding(.horizontal, 48)
+                        .padding(.vertical, 12)
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(timerManager.isRunning ? .red : .green)
-                .padding(.horizontal)
                 .padding(.bottom)
             }
             .toolbar {
