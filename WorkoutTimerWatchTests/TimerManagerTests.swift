@@ -27,6 +27,7 @@ struct MockRuntimeSessionProvider: RuntimeSessionProvider {
     }
 }
 
+@MainActor
 struct TimerManagerTests {
     private func makeManager() -> (TimerManager, MockRuntimeSessionProvider) {
         let sessionProvider = MockRuntimeSessionProvider()
