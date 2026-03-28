@@ -14,7 +14,7 @@ struct ContentView: View {
                 }
             } label: {
                 Text(
-                    DurationFormatter.format(
+                    DurationFormatter.formatNumeric(
                         timerManager.isRunning ? timerManager.remaining : timerManager.selectedInterval
                     )
                 )

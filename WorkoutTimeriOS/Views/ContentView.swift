@@ -29,7 +29,7 @@ struct ContentView: View {
                 Button {
                     showPicker = true
                 } label: {
-                    Label(String(localized: "change"), systemImage: "slider.horizontal.3")
+                    Label(.change, systemImage: "slider.horizontal.3")
                         .font(.subheadline)
                 }
                 .buttonStyle(.plain)

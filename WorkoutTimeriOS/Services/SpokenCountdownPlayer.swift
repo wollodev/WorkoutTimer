@@ -11,12 +11,12 @@ final class SpokenCountdownPlayer: Sendable {
 
         // Warm up the speech engine on a background thread at init
         // so the first real utterance doesn't cause a delay
-        queue.async {
+        queue.async { [self] in
             let utterance = AVSpeechUtterance(string: " ")
             utterance.volume = 0
             utterance.preUtteranceDelay = 0
             utterance.postUtteranceDelay = 0
-            synth.speak(utterance)
+            synthesizer.speak(utterance)
         }
     }
 

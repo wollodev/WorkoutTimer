@@ -4,10 +4,10 @@ enum FeedbackType: String, CaseIterable {
     case vibration
     case audio
 
-    var localizedName: String {
+    var localizedName: LocalizedStringResource {
         switch self {
-        case .vibration: String(localized: "vibration")
-        case .audio: String(localized: "audio")
+        case .vibration: .vibration
+        case .audio: .audio
         }
     }
 }
@@ -17,11 +17,11 @@ enum CountdownType: String, CaseIterable {
     case sound
     case spoken
 
-    var localizedName: String {
+    var localizedName: LocalizedStringResource {
         switch self {
-        case .off: String(localized: "off")
-        case .sound: String(localized: "countdownSound")
-        case .spoken: String(localized: "spokenCountdown")
+        case .off: .off
+        case .sound: .countdownSound
+        case .spoken: .spokenCountdown
         }
     }
 }
@@ -29,20 +29,15 @@ enum CountdownType: String, CaseIterable {
 @Observable
 final class FeedbackSettings {
     var feedbackType: FeedbackType {
-        get {
-            FeedbackType(rawValue: UserDefaults.standard.string(forKey: "feedbackType") ?? "vibration") ?? .vibration
-        }
-        set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: "feedbackType")
-        }
+        didSet { UserDefaults.standard.set(feedbackType.rawValue, forKey: "feedbackType") }
     }
 
     var countdownType: CountdownType {
-        get {
-            CountdownType(rawValue: UserDefaults.standard.string(forKey: "countdownType") ?? "sound") ?? .sound
-        }
-        set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: "countdownType")
-        }
+        didSet { UserDefaults.standard.set(countdownType.rawValue, forKey: "countdownType") }
+    }
+
+    init() {
+        feedbackType = FeedbackType(rawValue: UserDefaults.standard.string(forKey: "feedbackType") ?? "vibration") ?? .vibration
+        countdownType = CountdownType(rawValue: UserDefaults.standard.string(forKey: "countdownType") ?? "sound") ?? .sound
     }
 }

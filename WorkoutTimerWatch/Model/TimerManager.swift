@@ -54,24 +54,26 @@ final class TimerManager: NSObject, WKExtendedRuntimeSessionDelegate {
 
     // MARK: - WKExtendedRuntimeSessionDelegate
 
-    func extendedRuntimeSessionDidStart(
+    nonisolated func extendedRuntimeSessionDidStart(
         _: WKExtendedRuntimeSession
     ) {}
 
-    func extendedRuntimeSessionWillExpire(
+    nonisolated func extendedRuntimeSessionWillExpire(
         _: WKExtendedRuntimeSession
     ) {
-        hapticPlayer.playHaptic()
-        stop()
+        MainActor.assumeIsolated {
+            hapticPlayer.playHaptic()
+            stop()
+        }
     }
 
-    func extendedRuntimeSession(
+    nonisolated func extendedRuntimeSession(
         _: WKExtendedRuntimeSession,
         didInvalidateWith _: WKExtendedRuntimeSessionInvalidationReason,
         error _: (any Error)?
     ) {
-        DispatchQueue.main.async { [weak self] in
-            self?.engine.stop()
+        MainActor.assumeIsolated {
+            engine.stop()
         }
     }
 }

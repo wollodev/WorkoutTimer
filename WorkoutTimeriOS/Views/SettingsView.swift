@@ -7,30 +7,41 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(String(localized: "feedback")) {
-                    Picker(String(localized: "feedbackType"), selection: $settings.feedbackType) {
+                Section {
+                    Picker(selection: $settings.feedbackType) {
                         ForEach(FeedbackType.allCases, id: \.self) { type in
                             Text(type.localizedName).tag(type)
                         }
+                    } label: {
+                        Text(.feedbackType)
                     }
                     .pickerStyle(.segmented)
+                } header: {
+                    Text(.feedback)
                 }
 
-                Section(String(localized: "countdown")) {
-                    Picker(String(localized: "countdown"), selection: $settings.countdownType) {
+                Section {
+                    Picker(selection: $settings.countdownType) {
                         ForEach(CountdownType.allCases, id: \.self) { type in
                             Text(type.localizedName).tag(type)
                         }
+                    } label: {
+                        Text(.countdown)
                     }
-                    .pickerStyle(.segmented)
+                    .pickerStyle(.inline)
+                    .labelsHidden()
+                } header: {
+                    Text(.countdown)
                 }
             }
-            .navigationTitle(String(localized: "settings"))
+            .navigationTitle(Text(.settings))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(String(localized: "done")) {
+                    Button {
                         dismiss()
+                    } label: {
+                        Text(.done)
                     }
                 }
             }
