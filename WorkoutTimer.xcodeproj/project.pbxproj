@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0918CF0EB8E329EF320A779C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8766F0161F22998F667F994E /* Assets.xcassets */; };
 		0D296F30849C5D26E690B740 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8341373C20285008467C28D0 /* silence.wav */; };
+		17CCBBB327951DC048DDB18F /* DurationFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FFD4DB4558E497F35CE69B /* DurationFormatterTests.swift */; };
 		217AE4B56B45C88BBD9CA879 /* AudioFeedbackPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B865BD56B1BC05A5C5F62FF /* AudioFeedbackPlayer.swift */; };
 		25E4B903D61C8FA159AA496A /* iOSHapticPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C1FD8BB3F3501921CD5D8 /* iOSHapticPlayer.swift */; };
 		28E973649FB2A47091F93C44 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973586E98F662C24FDDCD2E3 /* ContentView.swift */; };
@@ -35,8 +36,7 @@
 		C4FADE2345C360BD0226E2B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E497FAC2CE0C327EACF92DB /* Assets.xcassets */; };
 		CC8E4BBF805EBEF90EC48254 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F24DA3E95AD1D059C2C34490 /* Localizable.xcstrings */; };
 		D54E02446C78B2CBC312B87D /* TimerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154ED3CD79AD7F82A9FCB33E /* TimerManagerTests.swift */; };
-		A1B2C3D4E5F60718192A3B4C /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6071829304A5B6C /* TimerEngineTests.swift */; };
-		C3D4E5F607182930415B6C7D /* DurationFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5F60718293041526C7D8E /* DurationFormatterTests.swift */; };
+		DA7DCF40F6EAA515740C3A62 /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461309FBDF4BCC532ECD666C /* TimerEngineTests.swift */; };
 		E145B2115426B35E6F8B840F /* HapticPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BAB2FE7924F5DDB341CC3B /* HapticPlayer.swift */; };
 		EE8FE7EEC31CE510C46E4568 /* CountdownSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CACCE031EB98AE020914083 /* CountdownSoundPlayer.swift */; };
 		F2CBA2F3FE1166B21688D8D4 /* iOSTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F37D2DCB28DFF2385EEDC1A /* iOSTimerManager.swift */; };
@@ -70,6 +70,7 @@
 		3E497FAC2CE0C327EACF92DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44EBC3355326BEE1B8464F39 /* IntervalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPickerView.swift; sourceTree = "<group>"; };
 		45E1866277ECEBDA192F484E /* FeedbackSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSettings.swift; sourceTree = "<group>"; };
+		461309FBDF4BCC532ECD666C /* TimerEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineTests.swift; sourceTree = "<group>"; };
 		4C70C21AEDF918EFB26EAA0C /* DurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
 		4CACCE031EB98AE020914083 /* CountdownSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownSoundPlayer.swift; sourceTree = "<group>"; };
 		4FC887641FF16F44ED476E9D /* TimerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngine.swift; sourceTree = "<group>"; };
@@ -82,6 +83,7 @@
 		88E1D79B89A294619E8D2EB5 /* beep_finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_finish.wav; sourceTree = "<group>"; };
 		929CCA3E06E6B15D98B00AA5 /* WorkoutTimeriOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = WorkoutTimeriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		973586E98F662C24FDDCD2E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		98FFD4DB4558E497F35CE69B /* DurationFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatterTests.swift; sourceTree = "<group>"; };
 		A442BC3E4BCAC41CE8EFA390 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		A48977953A87EECC4B4BE20E /* WorkoutTimerWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutTimerWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64F483D6A9AAE81A19D433F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,8 +95,6 @@
 		EDA7E1780659CE95056C66BB /* SpokenCountdownPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpokenCountdownPlayer.swift; sourceTree = "<group>"; };
 		F24DA3E95AD1D059C2C34490 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F3D666560FF076FB7D35216D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		B2C3D4E5F6071829304A5B6C /* TimerEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineTests.swift; sourceTree = "<group>"; };
-		D4E5F60718293041526C7D8E /* DurationFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -277,8 +277,8 @@
 		D6AFB0857E070A0FD6F7EBD2 /* WorkoutTimeriOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				B2C3D4E5F6071829304A5B6C /* TimerEngineTests.swift */,
-				D4E5F60718293041526C7D8E /* DurationFormatterTests.swift */,
+				98FFD4DB4558E497F35CE69B /* DurationFormatterTests.swift */,
+				461309FBDF4BCC532ECD666C /* TimerEngineTests.swift */,
 			);
 			path = WorkoutTimeriOSTests;
 			sourceTree = "<group>";
@@ -437,8 +437,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1B2C3D4E5F60718192A3B4C /* TimerEngineTests.swift in Sources */,
-				C3D4E5F607182930415B6C7D /* DurationFormatterTests.swift in Sources */,
+				17CCBBB327951DC048DDB18F /* DurationFormatterTests.swift in Sources */,
+				DA7DCF40F6EAA515740C3A62 /* TimerEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
