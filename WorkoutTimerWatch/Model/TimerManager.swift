@@ -23,6 +23,24 @@ final class TimerManager: NSObject, WKExtendedRuntimeSessionDelegate {
         engine.remaining
     }
 
+    var isInBreak: Bool {
+        engine.isInBreak
+    }
+
+    var breakEnabled: Bool {
+        get { engine.breakEnabled }
+        set { engine.breakEnabled = newValue }
+    }
+
+    var breakDuration: TimeInterval {
+        get { engine.breakDuration }
+        set { engine.breakDuration = newValue }
+    }
+
+    var breakDurationOptions: [TimeInterval] {
+        engine.breakDurationOptions
+    }
+
     private var session: RuntimeSession?
     private let hapticPlayer: HapticPlayer
     private let sessionProvider: RuntimeSessionProvider
@@ -36,6 +54,10 @@ final class TimerManager: NSObject, WKExtendedRuntimeSessionDelegate {
         super.init()
 
         engine.onIntervalComplete = { [weak self] in
+            self?.hapticPlayer.playHaptic()
+        }
+
+        engine.onBreakFinished = { [weak self] in
             self?.hapticPlayer.playHaptic()
         }
     }

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Bindable var settings: FeedbackSettings
+    @Bindable var timerManager: iOSTimerManager
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -32,6 +33,25 @@ struct SettingsView: View {
                     .labelsHidden()
                 } header: {
                     Text(.countdown)
+                }
+
+                Section {
+                    Toggle(isOn: $timerManager.breakEnabled) {
+                        Text(.breakTime)
+                    }
+
+                    if timerManager.breakEnabled {
+                        Picker(selection: $timerManager.breakDuration) {
+                            ForEach(timerManager.breakDurationOptions, id: \.self) { duration in
+                                Text(DurationFormatter.format(duration)).tag(duration)
+                            }
+                        } label: {
+                            Text(.breakDuration)
+                        }
+                        .pickerStyle(.wheel)
+                    }
+                } header: {
+                    Text(.breakTime)
                 }
             }
             .navigationTitle(Text(.settings))

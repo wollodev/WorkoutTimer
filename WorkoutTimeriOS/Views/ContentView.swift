@@ -22,7 +22,7 @@ struct ContentView: View {
                         .font(.system(size: 160, weight: .bold, design: .rounded))
                         .minimumScaleFactor(0.5)
                         .monospacedDigit()
-                        .foregroundStyle(timerManager.isRunning ? .green : .primary)
+                        .foregroundStyle(timerManager.isInBreak ? .orange : timerManager.isRunning ? .green : .primary)
                 }
                 .disabled(timerManager.isRunning)
 
@@ -71,7 +71,7 @@ struct ContentView: View {
                 )
             }
             .sheet(isPresented: $showSettings) {
-                SettingsView(settings: timerManager.feedbackSettings)
+                SettingsView(settings: timerManager.feedbackSettings, timerManager: timerManager)
             }
         }
     }

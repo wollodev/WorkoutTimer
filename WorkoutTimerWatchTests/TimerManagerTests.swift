@@ -2,8 +2,9 @@ import Testing
 import WatchKit
 @testable import WorkoutTimerWatch
 
-struct MockHapticPlayer: HapticPlayer {
-    func playHaptic() {}
+final class MockHapticPlayer: HapticPlayer {
+    var hapticCount = 0
+    func playHaptic() { hapticCount += 1 }
 }
 
 final class MockRuntimeSession: RuntimeSession {
@@ -29,18 +30,22 @@ struct MockRuntimeSessionProvider: RuntimeSessionProvider {
 
 @MainActor
 struct TimerManagerTests {
-    private func makeManager() -> (TimerManager, MockRuntimeSessionProvider) {
+    private func makeManager() -> (TimerManager, MockRuntimeSessionProvider, MockHapticPlayer) {
+        UserDefaults.standard.removeObject(forKey: "breakEnabled")
+        UserDefaults.standard.removeObject(forKey: "breakDuration")
+        UserDefaults.standard.removeObject(forKey: "selectedInterval")
         let sessionProvider = MockRuntimeSessionProvider()
+        let hapticPlayer = MockHapticPlayer()
         let manager = TimerManager(
-            hapticPlayer: MockHapticPlayer(),
+            hapticPlayer: hapticPlayer,
             sessionProvider: sessionProvider
         )
-        return (manager, sessionProvider)
+        return (manager, sessionProvider, hapticPlayer)
     }
 
     @Test("Start creates and starts runtime session")
     func startCreatesSession() {
-        let (manager, sessionProvider) = makeManager()
+        let (manager, sessionProvider, _) = makeManager()
 
         manager.start()
 
@@ -49,7 +54,7 @@ struct TimerManagerTests {
 
     @Test("Stop invalidates runtime session")
     func stopInvalidatesSession() {
-        let (manager, sessionProvider) = makeManager()
+        let (manager, sessionProvider, _) = makeManager()
         manager.start()
 
         manager.stop()
@@ -59,7 +64,7 @@ struct TimerManagerTests {
 
     @Test("Start sets running state via engine")
     func startSetsState() {
-        let (manager, _) = makeManager()
+        let (manager, _, _) = makeManager()
         manager.selectedInterval = 20
 
         manager.start()
@@ -70,11 +75,40 @@ struct TimerManagerTests {
 
     @Test("Stop resets running state")
     func stopResetsState() {
-        let (manager, _) = makeManager()
+        let (manager, _, _) = makeManager()
         manager.start()
 
         manager.stop()
 
         #expect(manager.isRunning == false)
+    }
+
+    @Test("Break state is exposed from engine")
+    func breakStateExposed() {
+        let (manager, _, _) = makeManager()
+
+        #expect(manager.isInBreak == false)
+        #expect(manager.breakEnabled == false)
+    }
+
+    @Test("Haptic plays when break finishes")
+    func hapticOnBreakFinished() {
+        let (manager, _, hapticPlayer) = makeManager()
+        manager.selectedInterval = 2
+        manager.breakEnabled = true
+        manager.breakDuration = 2
+
+        manager.start()
+        // Work phase
+        manager.engine.tick() // 1
+        manager.engine.tick() // 0
+        manager.engine.tick() // complete (haptic) + break start (haptic)
+        let countAfterBreakStart = hapticPlayer.hapticCount
+        // Break phase
+        manager.engine.tick() // 1
+        manager.engine.tick() // 0
+        manager.engine.tick() // break finished (haptic)
+
+        #expect(hapticPlayer.hapticCount == countAfterBreakStart + 1)
     }
 }

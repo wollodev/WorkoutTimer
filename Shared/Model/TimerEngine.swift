@@ -7,6 +7,10 @@ final class TimerEngine {
         TimeInterval($0)
     }
 
+    let breakDurationOptions: [TimeInterval] = stride(from: 1, through: 100, by: 1).map {
+        TimeInterval($0)
+    }
+
     var selectedInterval: TimeInterval = {
         let saved = UserDefaults.standard.double(forKey: "selectedInterval")
         return saved > 0 ? saved : 30
@@ -16,17 +20,36 @@ final class TimerEngine {
         }
     }
 
+    var breakEnabled: Bool = UserDefaults.standard.bool(forKey: "breakEnabled") {
+        didSet {
+            UserDefaults.standard.set(breakEnabled, forKey: "breakEnabled")
+        }
+    }
+
+    var breakDuration: TimeInterval = {
+        let saved = UserDefaults.standard.double(forKey: "breakDuration")
+        return saved > 0 ? saved : 10
+    }() {
+        didSet {
+            UserDefaults.standard.set(breakDuration, forKey: "breakDuration")
+        }
+    }
+
     var isRunning: Bool = false
+    var isInBreak: Bool = false
     var remaining: TimeInterval = 0
 
     var onTick: ((_ remaining: TimeInterval) -> Void)?
     var onIntervalComplete: (() -> Void)?
+    var onBreakStarted: (() -> Void)?
+    var onBreakFinished: (() -> Void)?
 
     private var timer: Timer?
 
     func start() {
         remaining = selectedInterval
         isRunning = true
+        isInBreak = false
         startTimer()
     }
 
@@ -34,18 +57,32 @@ final class TimerEngine {
         timer?.invalidate()
         timer = nil
         isRunning = false
+        isInBreak = false
     }
 
     func tick() {
         guard isRunning else { return }
 
-        remaining -= 1
-        onTick?(remaining)
-
         if remaining <= 0 {
-            onIntervalComplete?()
-            remaining = selectedInterval
+            if isInBreak {
+                isInBreak = false
+                onBreakFinished?()
+                remaining = selectedInterval
+            } else {
+                onIntervalComplete?()
+                if breakEnabled {
+                    isInBreak = true
+                    onBreakStarted?()
+                    remaining = breakDuration
+                } else {
+                    remaining = selectedInterval
+                }
+            }
+        } else {
+            remaining -= 1
         }
+
+        onTick?(remaining)
     }
 
     private func startTimer() {

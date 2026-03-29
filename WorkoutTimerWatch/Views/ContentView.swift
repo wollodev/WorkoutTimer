@@ -20,7 +20,7 @@ struct ContentView: View {
                 )
                 .font(.system(size: 64, weight: .bold, design: .rounded))
                 .monospacedDigit()
-                .foregroundStyle(timerManager.isRunning ? .green : .primary)
+                .foregroundStyle(timerManager.isInBreak ? .orange : timerManager.isRunning ? .green : .primary)
             }
             .buttonStyle(.bordered)
             .disabled(timerManager.isRunning)

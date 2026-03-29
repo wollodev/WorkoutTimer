@@ -22,6 +22,24 @@ final class iOSTimerManager {
         engine.remaining
     }
 
+    var isInBreak: Bool {
+        engine.isInBreak
+    }
+
+    var breakEnabled: Bool {
+        get { engine.breakEnabled }
+        set { engine.breakEnabled = newValue }
+    }
+
+    var breakDuration: TimeInterval {
+        get { engine.breakDuration }
+        set { engine.breakDuration = newValue }
+    }
+
+    var breakDurationOptions: [TimeInterval] {
+        engine.breakDurationOptions
+    }
+
     private let hapticPlayer = iOSHapticPlayer()
     private let audioPlayer = AudioFeedbackPlayer()
     private let countdownPlayer = CountdownSoundPlayer()
@@ -38,6 +56,10 @@ final class iOSTimerManager {
         engine.onTick = { [weak self] remaining in
             self?.handleTick(remaining: remaining)
         }
+
+        engine.onBreakFinished = { [weak self] in
+            self?.playSignal()
+        }
     }
 
     func start() {
@@ -50,7 +72,20 @@ final class iOSTimerManager {
         backgroundAudio.deactivate()
     }
 
+    private func playSignal() {
+        switch feedbackSettings.feedbackType {
+        case .vibration:
+            hapticPlayer.playHaptic()
+        case .audio:
+            if feedbackSettings.countdownType != .off {
+                audioPlayer.playBeep()
+            }
+        }
+    }
+
     private func playFeedback() {
+        if engine.breakEnabled { return }
+
         switch feedbackSettings.feedbackType {
         case .vibration:
             hapticPlayer.playHaptic()
@@ -62,6 +97,8 @@ final class iOSTimerManager {
     }
 
     private func handleTick(remaining: TimeInterval) {
+        if engine.isInBreak { return }
+
         let seconds = Int(remaining)
 
         switch feedbackSettings.countdownType {

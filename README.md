@@ -27,6 +27,7 @@ A minimal interval timer for iOS and Apple Watch, built with SwiftUI. Set a dura
 - **Dual platform** — native apps for iOS and Apple Watch with shared core logic
 - **Configurable intervals** — 5 to 120 seconds in 5-second steps
 - **Continuous cycling** — timer automatically restarts after each interval
+- **Optional break time** — configurable break between rounds (1–100 seconds), disabled by default
 - **Feedback options** (iOS)
   - Haptic vibration
   - Audio beep
