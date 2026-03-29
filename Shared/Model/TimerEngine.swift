@@ -39,16 +39,12 @@ final class TimerEngine {
     func tick() {
         guard isRunning else { return }
 
-        if remaining <= 0 {
-            remaining = selectedInterval
-            return
-        }
-
         remaining -= 1
         onTick?(remaining)
 
         if remaining <= 0 {
             onIntervalComplete?()
+            remaining = selectedInterval
         }
     }
 
