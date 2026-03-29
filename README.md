@@ -11,7 +11,9 @@ A minimal interval timer for iOS and Apple Watch, built with SwiftUI. Set a dura
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="screenshots/ios_settings.png" width="250" alt="iOS Settings">
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="screenshots/watchos.png" width="180" alt="watchOS">
+  <img src="screenshots/watchos.png" width="180" alt="watchOS Timer">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="screenshots/watchos_picker.png" width="180" alt="watchOS Picker">
 </p>
 
 ## Features
