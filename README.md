@@ -6,13 +6,11 @@
 
 A minimal interval timer for iOS and Apple Watch, built with SwiftUI. Set a duration, tap start, and get notified when each interval completes — with haptics, audio beeps, or a spoken countdown.
 
-<!--
-## Screenshots
-
-| iOS | watchOS |
-|-----|---------|
-| ![iOS Screenshot](screenshots/ios.png) | ![watchOS Screenshot](screenshots/watchos.png) |
--->
+<p align="center">
+  <img src="screenshots/ios_idle.png" width="250" alt="iOS">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="screenshots/watchos.png" width="180" alt="watchOS">
+</p>
 
 ## Features
 
