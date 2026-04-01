@@ -4,7 +4,11 @@ import WatchKit
 
 final class MockHapticPlayer: HapticPlayer {
     var hapticCount = 0
-    func playHaptic() { hapticCount += 1 }
+    var lastType: HapticType?
+    func playHaptic(_ type: HapticType) {
+        hapticCount += 1
+        lastType = type
+    }
 }
 
 final class MockRuntimeSession: RuntimeSession {

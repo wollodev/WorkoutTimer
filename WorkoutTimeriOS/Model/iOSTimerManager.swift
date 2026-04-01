@@ -63,6 +63,7 @@ final class iOSTimerManager {
     }
 
     func start() {
+        hapticPlayer.playHaptic(.start)
         backgroundAudio.activate()
         engine.start()
     }
@@ -70,12 +71,13 @@ final class iOSTimerManager {
     func stop() {
         engine.stop()
         backgroundAudio.deactivate()
+        hapticPlayer.playHaptic(.stop)
     }
 
     private func playSignal() {
         switch feedbackSettings.feedbackType {
         case .vibration:
-            hapticPlayer.playHaptic()
+            hapticPlayer.playHaptic(.success)
         case .audio:
             if feedbackSettings.countdownType != .off {
                 audioPlayer.playBeep()
@@ -84,13 +86,11 @@ final class iOSTimerManager {
     }
 
     private func playFeedback() {
-        if engine.breakEnabled { return }
-
         switch feedbackSettings.feedbackType {
         case .vibration:
-            hapticPlayer.playHaptic()
+            hapticPlayer.playHaptic(.success)
         case .audio:
-            if feedbackSettings.countdownType == .off {
+            if !engine.breakEnabled, feedbackSettings.countdownType == .off {
                 audioPlayer.playBeep()
             }
         }

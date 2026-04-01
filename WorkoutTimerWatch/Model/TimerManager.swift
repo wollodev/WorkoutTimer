@@ -54,15 +54,16 @@ final class TimerManager: NSObject, WKExtendedRuntimeSessionDelegate {
         super.init()
 
         engine.onIntervalComplete = { [weak self] in
-            self?.hapticPlayer.playHaptic()
+            self?.hapticPlayer.playHaptic(.success)
         }
 
         engine.onBreakFinished = { [weak self] in
-            self?.hapticPlayer.playHaptic()
+            self?.hapticPlayer.playHaptic(.success)
         }
     }
 
     func start() {
+        hapticPlayer.playHaptic(.start)
         session = sessionProvider.makeSession(delegate: self)
         session?.start()
         engine.start()
@@ -72,6 +73,7 @@ final class TimerManager: NSObject, WKExtendedRuntimeSessionDelegate {
         engine.stop()
         session?.invalidate()
         session = nil
+        hapticPlayer.playHaptic(.stop)
     }
 
     // MARK: - WKExtendedRuntimeSessionDelegate
@@ -84,7 +86,6 @@ final class TimerManager: NSObject, WKExtendedRuntimeSessionDelegate {
         _: WKExtendedRuntimeSession
     ) {
         MainActor.assumeIsolated {
-            hapticPlayer.playHaptic()
             stop()
         }
     }

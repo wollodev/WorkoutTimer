@@ -42,11 +42,16 @@ struct ContentView: View {
         .ignoresSafeArea(edges: .bottom)
         .padding()
         .sheet(isPresented: $showPicker) {
-            IntervalPickerView(
-                options: timerManager.intervalOptions,
-                selectedInterval: $manager.selectedInterval,
-                isPresented: $showPicker
-            )
+            NavigationStack {
+                IntervalPickerView(
+                    options: timerManager.intervalOptions,
+                    selectedInterval: $manager.selectedInterval,
+                    isPresented: $showPicker,
+                    breakEnabled: $manager.breakEnabled,
+                    breakDuration: $manager.breakDuration,
+                    breakDurationOptions: timerManager.breakDurationOptions
+                )
+            }
         }
     }
 }
