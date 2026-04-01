@@ -57,11 +57,9 @@ struct SettingsView: View {
             .navigationTitle(Text(.settings))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(role: .close) {
                         dismiss()
-                    } label: {
-                        Text(.done)
                     }
                 }
             }
