@@ -90,7 +90,7 @@ struct TimerEngineTests {
         #expect(tickValues == [4, 3])
     }
 
-    @Test("onIntervalComplete fires after zero is shown")
+    @Test("onIntervalComplete fires when remaining reaches zero")
     func onIntervalCompleteCallback() {
         let engine = makeEngine()
         engine.selectedInterval = 2
@@ -99,11 +99,14 @@ struct TimerEngineTests {
 
         engine.start()
         engine.tick() // 1
-        engine.tick() // 0
         #expect(completionCount == 0)
 
-        engine.tick() // complete, reset to 2
+        engine.tick() // 0 — callback fires immediately
         #expect(completionCount == 1)
+        #expect(engine.remaining == 0)
+
+        engine.tick() // transition: reset to 2
+        #expect(engine.remaining == 2)
     }
 
     @Test("Multiple start/stop cycles work correctly")

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,14 +30,18 @@
 		85E49C48607E017A105C50AA /* TimerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC887641FF16F44ED476E9D /* TimerEngine.swift */; };
 		8EB471FD4BE0152188A71560 /* HapticPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BAB2FE7924F5DDB341CC3B /* HapticPlayer.swift */; };
 		A624BC5D4E2AD14D269E7060 /* beep_finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88E1D79B89A294619E8D2EB5 /* beep_finish.wav */; };
+		A7B8C9D0E1F2A3B4C5D6E7F8 /* WatchFeedbackProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7B8C9D0E1F2A3B4C5D6E7 /* WatchFeedbackProvider.swift */; };
 		AD1141E6A09D2C8F488361D7 /* WorkoutTimerIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC50477762DB87683BA649B /* WorkoutTimerIOSApp.swift */; };
 		AD79E7BA7357A6F2C8EAD4EF /* IntervalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBC3355326BEE1B8464F39 /* IntervalPickerView.swift */; };
 		AE8DC377C4FE8FBC2DF043FA /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 63E6E58FB420F2D41B150C8A /* beep.wav */; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* TimerFeedbackProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* TimerFeedbackProvider.swift */; };
+		C3D4E5F6A7B8C9D0E1F2A3B4 /* TimerFeedbackProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2 /* TimerFeedbackProvider.swift */; };
 		C4FADE2345C360BD0226E2B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E497FAC2CE0C327EACF92DB /* Assets.xcassets */; };
 		CC8E4BBF805EBEF90EC48254 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F24DA3E95AD1D059C2C34490 /* Localizable.xcstrings */; };
 		D54E02446C78B2CBC312B87D /* TimerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154ED3CD79AD7F82A9FCB33E /* TimerManagerTests.swift */; };
 		DA7DCF40F6EAA515740C3A62 /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461309FBDF4BCC532ECD666C /* TimerEngineTests.swift */; };
 		E145B2115426B35E6F8B840F /* HapticPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BAB2FE7924F5DDB341CC3B /* HapticPlayer.swift */; };
+		E5F6A7B8C9D0E1F2A3B4C5D6 /* iOSFeedbackProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5F6A7B8C9D0E1F2A3B4C5 /* iOSFeedbackProvider.swift */; };
 		EE8FE7EEC31CE510C46E4568 /* CountdownSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CACCE031EB98AE020914083 /* CountdownSoundPlayer.swift */; };
 		F2CBA2F3FE1166B21688D8D4 /* iOSTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F37D2DCB28DFF2385EEDC1A /* iOSTimerManager.swift */; };
 /* End PBXBuildFile section */
@@ -62,7 +66,7 @@
 /* Begin PBXFileReference section */
 		0AC50477762DB87683BA649B /* WorkoutTimerIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimerIOSApp.swift; sourceTree = "<group>"; };
 		154ED3CD79AD7F82A9FCB33E /* TimerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManagerTests.swift; sourceTree = "<group>"; };
-		1C59724C83B110FBFCCB4918 /* WorkoutTimeriOSTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = WorkoutTimeriOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C59724C83B110FBFCCB4918 /* WorkoutTimeriOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutTimeriOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2777AE73CE14C68E3C6C9016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3079F8F55748398047B242E3 /* WorkoutTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimerApp.swift; sourceTree = "<group>"; };
 		32BAB2FE7924F5DDB341CC3B /* HapticPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticPlayer.swift; sourceTree = "<group>"; };
@@ -81,20 +85,23 @@
 		8341373C20285008467C28D0 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
 		8766F0161F22998F667F994E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88E1D79B89A294619E8D2EB5 /* beep_finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep_finish.wav; sourceTree = "<group>"; };
-		929CCA3E06E6B15D98B00AA5 /* WorkoutTimeriOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = WorkoutTimeriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		929CCA3E06E6B15D98B00AA5 /* WorkoutTimeriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutTimeriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		973586E98F662C24FDDCD2E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		98FFD4DB4558E497F35CE69B /* DurationFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatterTests.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* TimerFeedbackProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFeedbackProvider.swift; sourceTree = "<group>"; };
 		A442BC3E4BCAC41CE8EFA390 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		A48977953A87EECC4B4BE20E /* WorkoutTimerWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutTimerWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64F483D6A9AAE81A19D433F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AF18136B3B4CBBB0D14ECB84 /* WatchHapticPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchHapticPlayer.swift; sourceTree = "<group>"; };
 		C9D31CE50D95C81707D28CF6 /* WorkoutTimerWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutTimerWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC43050909138D741BF5B3B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D4E5F6A7B8C9D0E1F2A3B4C5 /* iOSFeedbackProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSFeedbackProvider.swift; sourceTree = "<group>"; };
 		D9CB7B1551C159FAE57B2B96 /* IntervalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPickerView.swift; sourceTree = "<group>"; };
 		E65C1FD8BB3F3501921CD5D8 /* iOSHapticPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSHapticPlayer.swift; sourceTree = "<group>"; };
 		EDA7E1780659CE95056C66BB /* SpokenCountdownPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpokenCountdownPlayer.swift; sourceTree = "<group>"; };
 		F24DA3E95AD1D059C2C34490 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F3D666560FF076FB7D35216D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F6A7B8C9D0E1F2A3B4C5D6E7 /* WatchFeedbackProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchFeedbackProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -146,6 +153,7 @@
 				3B865BD56B1BC05A5C5F62FF /* AudioFeedbackPlayer.swift */,
 				5955E7C4ED0798D8020706D5 /* BackgroundAudioManager.swift */,
 				4CACCE031EB98AE020914083 /* CountdownSoundPlayer.swift */,
+				D4E5F6A7B8C9D0E1F2A3B4C5 /* iOSFeedbackProvider.swift */,
 				E65C1FD8BB3F3501921CD5D8 /* iOSHapticPlayer.swift */,
 				EDA7E1780659CE95056C66BB /* SpokenCountdownPlayer.swift */,
 			);
@@ -165,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				32BAB2FE7924F5DDB341CC3B /* HapticPlayer.swift */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* TimerFeedbackProvider.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -184,6 +193,7 @@
 		6C9D29886BA8D422588388F8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F6A7B8C9D0E1F2A3B4C5D6E7 /* WatchFeedbackProvider.swift */,
 				AF18136B3B4CBBB0D14ECB84 /* WatchHapticPlayer.swift */,
 				592DE8CF0731C13622CCCF75 /* WatchRuntimeSession.swift */,
 			);
@@ -368,11 +378,9 @@
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					137F294AF8498A2296384D1A = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					1603BCB788DFF84758CC1F4F = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					1890606AEC30B829F6421171 = {
@@ -380,7 +388,6 @@
 						ProvisioningStyle = Automatic;
 					};
 					EC25779E3A102B82005DECD5 = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -396,7 +403,6 @@
 			);
 			mainGroup = 9666ABF3A60DD414C32A27E9;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -453,6 +459,8 @@
 				3489D050F8977F81532FA1F2 /* TimerEngine.swift in Sources */,
 				724F9E6798FB4761F0E0D34E /* TimerManager.swift in Sources */,
 				815BF1E999928B9591B7456A /* WatchHapticPlayer.swift in Sources */,
+				C3D4E5F6A7B8C9D0E1F2A3B4 /* TimerFeedbackProvider.swift in Sources */,
+				A7B8C9D0E1F2A3B4C5D6E7F8 /* WatchFeedbackProvider.swift in Sources */,
 				7B5BB1A0A68BA34B709F86BA /* WatchRuntimeSession.swift in Sources */,
 				30650C6D70D85D169BF2EBED /* WorkoutTimerApp.swift in Sources */,
 			);
@@ -474,8 +482,10 @@
 				5DC09705551F65A076A042FA /* SpokenCountdownPlayer.swift in Sources */,
 				85E49C48607E017A105C50AA /* TimerEngine.swift in Sources */,
 				AD1141E6A09D2C8F488361D7 /* WorkoutTimerIOSApp.swift in Sources */,
+				E5F6A7B8C9D0E1F2A3B4C5D6 /* iOSFeedbackProvider.swift in Sources */,
 				25E4B903D61C8FA159AA496A /* iOSHapticPlayer.swift in Sources */,
 				F2CBA2F3FE1166B21688D8D4 /* iOSTimerManager.swift in Sources */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* TimerFeedbackProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +540,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5NX788AYV4;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WorkoutTimeriOS/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -549,6 +560,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5NX788AYV4;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WorkoutTimerWatch/Resources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.wolfgangkluth.workouttimer;
@@ -696,6 +708,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5NX788AYV4;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -716,6 +729,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5NX788AYV4;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -757,6 +771,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5NX788AYV4;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WorkoutTimerWatch/Resources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.wolfgangkluth.workouttimer;
@@ -774,6 +789,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5NX788AYV4;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WorkoutTimeriOS/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;

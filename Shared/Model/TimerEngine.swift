@@ -40,6 +40,7 @@ final class TimerEngine {
     var remaining: TimeInterval = 0
 
     var onTick: ((_ remaining: TimeInterval) -> Void)?
+    var onIntervalStarted: (() -> Void)?
     var onIntervalComplete: (() -> Void)?
     var onBreakStarted: (() -> Void)?
     var onBreakFinished: (() -> Void)?
@@ -64,22 +65,31 @@ final class TimerEngine {
         guard isRunning else { return }
 
         if remaining <= 0 {
-            if isInBreak {
+            // Previous tick reached zero — now transition
+            switch (isInBreak, breakEnabled) {
+            case (true, _):
+                onIntervalStarted?()
                 isInBreak = false
-                onBreakFinished?()
                 remaining = selectedInterval
-            } else {
-                onIntervalComplete?()
-                if breakEnabled {
-                    isInBreak = true
-                    onBreakStarted?()
-                    remaining = breakDuration
-                } else {
-                    remaining = selectedInterval
-                }
+            case (false, true):
+                isInBreak = true
+                remaining = breakDuration
+            case (false, false):
+                remaining = selectedInterval
             }
         } else {
             remaining -= 1
+            // Fire callbacks the moment remaining hits zero
+            if remaining <= 0 {
+                if isInBreak {
+                    onBreakFinished?()
+                } else {
+                    onIntervalComplete?()
+                    if breakEnabled {
+                        onBreakStarted?()
+                    }
+                }
+            }
         }
 
         onTick?(remaining)

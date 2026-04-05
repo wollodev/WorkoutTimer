@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 @Observable
 @MainActor
@@ -40,30 +41,39 @@ final class iOSTimerManager {
         engine.breakDurationOptions
     }
 
-    private let hapticPlayer = iOSHapticPlayer()
-    private let audioPlayer = AudioFeedbackPlayer()
-    private let countdownPlayer = CountdownSoundPlayer()
-    private let spokenPlayer = SpokenCountdownPlayer()
+    let feedbackProvider = iOSFeedbackProvider()
     private let backgroundAudio = BackgroundAudioManager()
 
-    var feedbackSettings = FeedbackSettings()
+    var feedbackSettings: FeedbackSettings {
+        feedbackProvider.feedbackSettings
+    }
 
     init() {
+        engine.onIntervalStarted = { [weak self] in
+            self?.feedbackProvider.intervalStarted()
+        }
+
         engine.onIntervalComplete = { [weak self] in
-            self?.playFeedback()
+            self?.feedbackProvider.intervalCompleted()
         }
 
         engine.onTick = { [weak self] remaining in
-            self?.handleTick(remaining: remaining)
+            guard let self else { return }
+            self.feedbackProvider.tick(remaining: remaining, isInBreak: self.engine.isInBreak)
+        }
+
+        engine.onBreakStarted = { [weak self] in
+            self?.feedbackProvider.breakStarted()
         }
 
         engine.onBreakFinished = { [weak self] in
-            self?.playSignal()
+            self?.feedbackProvider.breakFinished()
         }
     }
 
     func start() {
-        hapticPlayer.playHaptic(.start)
+        UIApplication.shared.isIdleTimerDisabled = true
+        feedbackProvider.timerStarted()
         backgroundAudio.activate()
         engine.start()
     }
@@ -71,51 +81,7 @@ final class iOSTimerManager {
     func stop() {
         engine.stop()
         backgroundAudio.deactivate()
-        hapticPlayer.playHaptic(.stop)
-    }
-
-    private func playSignal() {
-        switch feedbackSettings.feedbackType {
-        case .vibration:
-            hapticPlayer.playHaptic(.success)
-        case .audio:
-            if feedbackSettings.countdownType != .off {
-                audioPlayer.playBeep()
-            }
-        }
-    }
-
-    private func playFeedback() {
-        switch feedbackSettings.feedbackType {
-        case .vibration:
-            hapticPlayer.playHaptic(.success)
-        case .audio:
-            if !engine.breakEnabled, feedbackSettings.countdownType == .off {
-                audioPlayer.playBeep()
-            }
-        }
-    }
-
-    private func handleTick(remaining: TimeInterval) {
-        if engine.isInBreak { return }
-
-        let seconds = Int(remaining)
-
-        switch feedbackSettings.countdownType {
-        case .off:
-            break
-        case .sound:
-            if seconds >= 1, seconds <= 3 {
-                countdownPlayer.playTick()
-            } else if seconds <= 0 {
-                countdownPlayer.playFinish()
-            }
-        case .spoken:
-            if seconds >= 1, seconds <= 3 {
-                spokenPlayer.speakCountdown(seconds)
-            } else if seconds <= 0 {
-                spokenPlayer.speakDone()
-            }
-        }
+        feedbackProvider.timerStopped()
+        UIApplication.shared.isIdleTimerDisabled = false
     }
 }
